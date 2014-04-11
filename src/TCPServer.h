@@ -10,10 +10,13 @@ class TCPServer : public QObject
 public:
     TCPServer();
     virtual ~TCPServer();
+    void setPort(quint16 port);
+    void start();
 
 private:
     QTcpServer * mTcpServer;
     QTcpSocket * mSocket;
+    quint16 mPort;
 
 private slots:
     void newConnection();

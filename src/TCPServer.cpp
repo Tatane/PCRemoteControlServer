@@ -1,24 +1,29 @@
 #include "TCPServer.h"
 
 
-const quint16 PORT_WOL = 9;
-
 TCPServer::TCPServer()
     : mTcpServer(0)
+    , mPort(80)
+{
+}
+
+TCPServer::~TCPServer()
+{
+}
+
+void TCPServer::setPort(quint16 port)
+{
+    mPort = port;
+}
+
+void TCPServer::start()
 {
     mTcpServer = new QTcpServer();
 
     connect(mTcpServer, SIGNAL(newConnection()), this, SLOT(newConnection()));
 
-    mTcpServer->listen(QHostAddress::LocalHost, PORT_WOL);
-    qDebug()<<"Listening on port"<<PORT_WOL;
-
-
-}
-
-TCPServer::~TCPServer()
-{
-
+    mTcpServer->listen(QHostAddress::LocalHost, mPort);
+    qDebug()<<"Listening on port"<<mPort;
 }
 
 void TCPServer::newConnection()
