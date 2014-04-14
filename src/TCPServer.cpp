@@ -22,7 +22,7 @@ void TCPServer::start()
 
     connect(mTcpServer, SIGNAL(newConnection()), this, SLOT(newConnection()));
 
-    mTcpServer->listen(QHostAddress::LocalHost, mPort);
+    mTcpServer->listen(QHostAddress::Any, mPort);
     qDebug()<<"Listening on port"<<mPort;
 }
 
